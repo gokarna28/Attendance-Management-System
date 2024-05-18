@@ -1,0 +1,395 @@
+:root {
+  --primaryColor: #7163ba;
+  --secondaryColor: #978ec7;
+  --bodyColor: #ebe9e9;
+  --lightGreyColor: #f4f5fa;
+  --whiteColor: #ffffff;
+  --blackColor: #222;
+  --lightBlackColor: #454955;
+  --darkPurpleColor: #2c2f4e;
+  --redColor: rgb(255, 55, 0);
+  --greenColor: rgb(89, 183, 110);
+  --lightBlue: rgb(52, 116, 245);
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: poppins;
+  background-color: var(--bodyColor);
+}
+a {
+  text-decoration: none;
+}
+.body_container {
+  display: flex;
+}
+.background {
+  filter: blur(8px);
+  z-index: 1;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-size: cover;
+}
+.sidebar {
+  background-color: var(--primaryColor);
+  height: 100vh;
+  position: sticky;
+  padding: 20px;
+  width: 90px;
+  transition: all 0.5s linear;
+  overflow: hidden;
+}
+.sidebar:hover {
+  width: 270px;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.active {
+  border-radius: 15px;
+  background-color: var(--secondaryColor);
+}
+.side_menu {
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+.menu_item {
+  margin-bottom: 100px;
+}
+.item {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  color: var(--whiteColor);
+  font-size: 15px;
+  margin-top: 15px;
+  height: 50px;
+}
+.item i {
+  font-size: 20px;
+  margin-right: 37px;
+}
+.item:hover {
+  border-radius: 15px;
+  background-color: var(--secondaryColor);
+}
+.item p {
+  /* background-color: red; */
+  height: 20px;
+  overflow: hidden;
+}
+.main_section {
+  /* background-color: red; */
+  height: 200px;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+}
+.search_container {
+  display: flex;
+  align-items: center;
+  background-color: var(--whiteColor);
+  border-radius: 10px;
+  padding: 10px 20px;
+  justify-content: space-between;
+}
+
+.search_btn input {
+  font-size: 20px;
+  border: 1px solid var(--blackColor);
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.search_btn button {
+  font-size: 20px;
+  padding: 5px 10px;
+  border: 1px solid var(--blackColor);
+  border-radius: 5px;
+  background-color: var(--primaryColor);
+  color: var(--whiteColor);
+}
+.search_btn button i {
+  margin-right: 10px;
+}
+.header {
+  /* background-color: red; */
+  color: var(--primaryColor);
+}
+
+/* student info */
+.student_container {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: var(--whiteColor);
+}
+.student_container .stuedent_details table th {
+  border: 0.5px solid rgb(184, 182, 182);
+  width: 400px;
+  padding: 5px 10px;
+}
+.add_btn {
+  /* background-color: red; */
+  display: flex;
+  justify-content: right;
+}
+.add_btn button {
+  font-size: 20px;
+  color: var(--whiteColor);
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  background-color: var(--primaryColor);
+}
+.stuedent_details table {
+  margin-top: 5px;
+}
+.student_container h3 {
+  display: flex;
+  justify-content: center;
+  color: var(--lightBlackColor);
+}
+.studenta_form_container {
+  /* background-color: var(--lightBlackColor); */
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 20%;
+  left: 35%;
+}
+.student_add {
+  background-color: var(--whiteColor);
+  padding: 20px;
+  border-radius: 15px;
+  width: 650px;
+  box-shadow: rgba(96, 95, 95, 0.2) 0px 2px 10px 2px;
+  z-index: 2;
+}
+.student_add {
+  background-color: var(--whiteColor);
+  padding: 20px;
+  border-radius: 15px;
+  width: 700px;
+  box-shadow: rgba(1, 1, 1, 0.2) 0px 2px 10px 2px;
+  z-index: 2;
+}
+.student_add .close_btn {
+  font-size: 30px;
+  display: flex;
+  /* background-color: red; */
+  justify-content: right;
+}
+.fields {
+  /* background-color: yellow; */
+  display: flex;
+  flex-wrap: wrap;
+}
+.admin_fields {
+  display: flex;
+  justify-content: center;
+}
+.input_field {
+  /* background-color: red; */
+  margin: 10px;
+}
+.input_field label {
+  font-size: 18px;
+}
+.input {
+  font-size: 18px;
+  border-radius: 5px;
+  border: 1px solid black;
+  padding: 5px 10px;
+  width: 300px;
+}
+.input input {
+  font-size: 18px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.input select {
+  font-size: 18px;
+  width: 250px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+.input a {
+  text-decoration: none;
+  color: var(--blackColor);
+}
+.input i {
+  margin-right: 10px;
+  color: var(--blackColor);
+}
+.submit_btn {
+  display: flex;
+  justify-content: center;
+}
+.submit_btn button {
+  font-size: 20px;
+  background-color: var(--primaryColor);
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  color: var(--whiteColor);
+  margin-top: 20px;
+}
+.hide {
+  display: none;
+}
+.errors {
+  font-size: 12px;
+  color: var(--redColor);
+}
+.data {
+  background-color: rgb(206, 231, 206);
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  justify-content: center;
+  padding: 5px 10px;
+}
+.action_btn {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 100px;
+}
+.action_btn a {
+  font-size: 25px;
+}
+.delete_btn {
+  color: var(--redColor);
+}
+.edit_btn {
+  color: var(--lightBlue);
+}
+
+.profile_container {
+  /* background-color: red; */
+  display: flex;
+  align-items: center;
+}
+.profile_btn {
+  display: flex;
+  align-items: center;
+  background-color: var(--bodyColor);
+  border-radius: 100px;
+  height: 45px;
+}
+.letter {
+  background-color: var(--secondaryColor);
+  color: var(--whiteColor);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: 500;
+  border-radius: 100px;
+  box-shadow: rgba(1, 1, 1, 0.2) 0px 2px 10px 2px;
+}
+.profile_btn p {
+  width: 100px;
+  margin-left: 10px;
+  color: var(--lightBlackColor);
+}
+
+/* teacher section */
+.teacher_container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+.teacher_form {
+  background-color: var(--whiteColor);
+  box-shadow: rgba(1, 1, 1, 0.2) 0px 2px 10px 2px;
+  border-radius: 15px;
+  padding: 20px;
+  width: 500px;
+  position: fixed;
+  top: 20%;
+  left: 40%;
+}
+.teacher_form h3 {
+  display: flex;
+  justify-content: center;
+}
+#fields_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.teacher_form #fields_container .input {
+  width: 300px;
+}
+.teacher_container button {
+  font-size: 20px;
+  color: var(--whiteColor);
+  background-color: var(--primaryColor);
+  border-radius: 5px;
+  border: 1px solid var(--blackColor);
+  padding: 5px 10px;
+}
+.teacher_container h3 {
+  color: var(--lightBlackColor);
+  display: flex;
+  justify-content: center;
+}
+.teacher_details table th {
+  border: 0.5px solid rgb(177, 174, 174);
+  width: 500px;
+}
+.teacher_data {
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+.teacher_form .close_btn {
+  font-size: 30px;
+  display: flex;
+  justify-content: right;
+}
+.faculty_btn {
+  /* background-color: var(--redColor); */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  width: 70%;
+}
+.faculty_btn p:hover {
+  background-color: var(--secondaryColor);
+  color: var(--whiteColor);
+  border-radius: 5px;
+}
+.faculty_btn p {
+  /* background-color: yellow; */
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: 500;
+}
+.faculty_active {
+  background-color: var(--secondaryColor);
+  color: var(--whiteColor);
+  border-radius: 5px;
+}
+.red-row {
+  background-color:var(--redColor);
+}
