@@ -391,5 +391,112 @@ a {
   border-radius: 5px;
 }
 .red-row {
-  background-color:var(--redColor);
+  background-color: var(--redColor);
+}
+.logo_img img {
+  width: 50px;
+  /* background-color: red; */
+}
+
+.dashboard_container {
+  padding: 20px;
+  .card_container {
+    /* background-color: var(--redColor); */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .card {
+      background-color: var(--lightGreyColor);
+      padding: 20px;
+      width: 240px;
+      height: 100px;
+      border-radius: 10px;
+      p {
+        font-size: 18px;
+        font-weight: 500;
+        color: var(--lightBlackColor);
+      }
+      span {
+        font-size: 25px;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.search_student {
+  margin-top: 50px;
+  .search_btn {
+    input {
+      width: 400px;
+    }
+    button {
+      border: none;
+    }
+  }
+  .table_contaier {
+    margin-top: 20px;
+    th {
+      background-color: rgb(68, 177, 236);
+      color: var(--whiteColor);
+      font-size: 18px;
+      padding: 5px 10px;
+      font-weight: 500;
+      width: 200px;
+    }
+    .data {
+      background-color: rgb(173, 206, 173);
+    }
+  }
+}
+
+.application_container {
+  background-color: var(--whiteColor);
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  h2 {
+    display: flex;
+    justify-content: center;
+    color: var(--lightBlackColor);
+  }
+  .table_container {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+    table{
+      margin-top: 20px;
+    }
+    th {
+      background-color: rgb(68, 177, 236);
+      font-size: 18px;
+      color: var(--whiteColor);
+      padding: 5px 10px;
+    }
+    td {
+      padding: 10px 0;
+      .dat {
+        background-color:rgb(248, 180, 53);
+        padding: 5px 10px;
+        color: var(--whiteColor);
+      }
+      .action {
+        /* background-color: var(--redColor); */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        button {
+          font-size: 18px;
+          padding: 5px 10px;
+          border: none;
+          color: var(--whiteColor);
+          border-radius: 5px;
+          margin: 0 10px;
+          width: 100px;
+        }
+      }
+    }
+  }
 }

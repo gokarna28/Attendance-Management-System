@@ -242,8 +242,9 @@ require ("attendance_submit.php");
                         $faculty = "";
                         $semester = "";
                         if (isset($_POST['search'])) {
-                            $faculty = $_POST['faculty'];
-                            $semester = $_POST['semester'];
+                            $faculty = isset($_POST['faculty']) ? $_POST['faculty'] : '';
+                            $semester = isset($_POST['semester']) ? $_POST['semester'] : '';
+
                             if (!empty($faculty) || !empty($semester)) {
                                 $student_query = "SELECT * FROM student WHERE faculty='$faculty' AND semester='$semester'";
                                 $student_data = mysqli_query($conn, $student_query);

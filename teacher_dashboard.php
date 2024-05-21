@@ -61,7 +61,7 @@ $total_bbm = mysqli_num_rows($select_data);
                 <img src="image/graduated.png">
             </div>
             <div class="menu">
-                <div class="item active">
+                <div class="item active" id="dashboard" onclick="dashboardShow()">
                     <i class="fa-solid fa-gauge"></i>
                     <p>Dashboard</p>
                 </div>
@@ -71,14 +71,11 @@ $total_bbm = mysqli_num_rows($select_data);
                         <p>Take Attendance</p>
                     </div>
                 </a>
-                <div class="item">
+                <div class="item" id="attendance" onclick="attendanceShow()">
                     <i class="fa-solid fa-users-viewfinder"></i>
                     <p>View Attendance</p>
                 </div>
-                <div class="item">
-                    <i class="fa-solid fa-gear"></i>
-                    <p>Settings</p>
-                </div>
+
             </div>
             <div class="logout_btn">
                 <a href="logout.php">
@@ -108,7 +105,7 @@ $total_bbm = mysqli_num_rows($select_data);
             </div>
 
             <!-- Faculty -->
-            <div class="faculty_wrapper hide">
+            <div class="faculty_wrapper ">
                 <div class="faculty_container">
                     <div class="faculty_card csit">
                         <a href="#">
@@ -141,7 +138,7 @@ $total_bbm = mysqli_num_rows($select_data);
 
 
             <!-- View attendance -->
-            <div class="attendance_container">
+            <div class="attendance_container hide">
                 <h2>Attendance Details</h2>
                 <div class="attendance_wrapper">
                     <form action="" method="post">
@@ -244,7 +241,7 @@ $total_bbm = mysqli_num_rows($select_data);
                                                     <?php
                                                 }
                                             } else {
-                                                echo "No records found for the specified criteria.";
+                                                echo "<script>alert('No records found for the specified criteria.')</script>";
                                             }
                                         } else {
                                             echo "Error executing search query: " . mysqli_error($conn);
@@ -265,6 +262,21 @@ $total_bbm = mysqli_num_rows($select_data);
     </div>
     </div>
 
+
+    <script>
+        function dashboardShow() {
+            document.querySelector('#dashboard').classList.add('active');
+            document.querySelector('#attendance').classList.remove('active');
+            document.querySelector('.attendance_container').classList.add('hide');
+            document.querySelector('.faculty_wrapper').classList.remove('hide');
+        }
+        function attendanceShow(){
+            document.querySelector('#dashboard').classList.remove('active');
+            document.querySelector('#attendance').classList.add('active');
+            document.querySelector('.attendance_container').classList.remove('hide');
+            document.querySelector('.faculty_wrapper').classList.add('hide');
+        }
+    </script>
 </body>
 
 </html>

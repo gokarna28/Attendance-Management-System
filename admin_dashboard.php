@@ -28,7 +28,7 @@ if (isset($_SESSION['admin_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin dashboard</title>
-    <link rel="stylesheet" href="css/admin2s.css" />
+    <link rel="stylesheet" href="css/admins.css" />
     <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- Import Google font - Poppins  -->
@@ -49,7 +49,9 @@ if (isset($_SESSION['admin_id'])) {
 
         <div class="sidebar">
             <div class="side_menu">
-                <div class="logo_img">logo</div>
+                <div class="logo_img">
+                    <img src="image/graduated.png">
+                </div>
                 <div class="menu_item">
                     <div class="item active" id="dashboard" onclick="dashboardInfo()">
                         <i class="fa-solid fa-gauge"></i>
@@ -110,7 +112,131 @@ if (isset($_SESSION['admin_id'])) {
 
             <!-- dashboard section -->
             <div class="dashboard_container">
-                dashboard
+                <?php
+                //total students
+                $select = "SELECT * FROM student";
+                $data = mysqli_query($conn, $select);
+                $total_student = mysqli_num_rows($data);
+
+                //total student in bca
+                $select = "SELECT * FROM student where faculty='bca'";
+                $data = mysqli_query($conn, $select);
+                $total_bca = mysqli_num_rows($data);
+
+                //total student in csit
+                $select = "SELECT * FROM student where faculty='csit'";
+                $data = mysqli_query($conn, $select);
+                $total_csit = mysqli_num_rows($data);
+
+                //total student in bbm
+                $select = "SELECT * FROM student where faculty='bbm'";
+                $data = mysqli_query($conn, $select);
+                $total_bbm = mysqli_num_rows($data);
+
+                //total teacher
+                $select = "SELECT * FROM teacher";
+                $data = mysqli_query($conn, $select);
+                $total_teacher = mysqli_num_rows($data);
+                ?>
+                <div class="card_container">
+                    <div class="card" style="background-color: rgb(227, 144, 187);">
+                        <p>TOTAL STUDENTS</p>
+                        <span><?php echo $total_student ?></span>
+                    </div>
+                    <div class="card" style="background-color: rgb(144, 227, 194);">
+                        <p>TOTAL TEACHERS</p>
+                        <span><?php echo $total_teacher ?></span>
+                    </div>
+                    <div class="card" style="background-color: rgb(190, 227, 144);">
+                        <p>TOTAL BCA STUDENTS</p>
+                        <span><?php echo $total_bca ?></span>
+                    </div>
+                    <div class="card" style="background-color:rgb(144, 184, 227);">
+                        <p>TOTAL CSIT STUDENTS</p>
+                        <span><?php echo $total_csit ?></span>
+                    </div>
+                    <div class="card" style="background-color:rgb(178, 144, 227);">
+                        <p>TOTAL BBM STUDENTS</p>
+                        <span><?php echo $total_bbm ?></span>
+                    </div>
+
+                </div>
+
+                <div class="search_student">
+                    <div class="search_btn">
+                        <form action="" method="post">
+                            <input type="number" name="roll" placeholder="Enter student roll number" required>
+                            <button type="submit" name="search_student">Search</button>
+                        </form>
+                    </div>
+                    <div class="table_contaier">
+                        <table>
+                            <thead>
+                                <th>Roll No.</th>
+                                <th style="width:300px">Student Name</th>
+                                <th>Email</th>
+                                <th>Faculty</th>
+                                <th>Semester</th>
+                                <th>Attendance</th>
+                            </thead>
+                            <tbody>
+                                <?php
+                                if (isset($_POST['search_student'])) {
+                                    $roll = $_POST['roll'];
+
+                                    $student_query = "SELECT COUNT('a.status') As status, s.student_roll, s.student_name, s.student_email, s.faculty, s.semester
+                                FROM student as s
+                                INNER JOIN attendance as a ON s.student_id=a.s_id 
+                                WHERE student_roll='$roll' AND status='present'";
+                                    $student_data = mysqli_query($conn, $student_query);
+                                    if ($student_data) {
+                                        $result_student = mysqli_fetch_assoc($student_data);
+                                        $percent = (($result_student['status'] / 45) * 100);
+                                        ?>
+                                        <tr>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo $result_student['student_roll'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo $result_student['student_name'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo $result_student['student_email'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo $result_student['faculty'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo $result_student['semester'] ?>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="data">
+                                                    <?php echo number_format($percent, 2); ?>%
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        <?php
+                                    }
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                        </table>
+                    </div>
+                </div>
+
+
             </div>
 
             <!-- student info -->
@@ -362,7 +488,155 @@ if (isset($_SESSION['admin_id'])) {
 
             <!-- appication section -->
             <div class="application_container hide">
-                applications
+                <h2>Applications</h2>
+                <div class="table_container">
+                    <table>
+                        <thead>
+                            <th>Date</th>
+                            <th>Student Name</th>
+                            <th>Roll No.</th>
+                            <th>Faculty</th>
+                            <th>Semester</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT * 
+                            FROM application as a
+                            INNER JOIN student as s ON a.student_id=s.student_id WHERE application_status='pending'";
+                            $data = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($data) > 0) {
+                                while ($result = mysqli_fetch_assoc($data)) {
+                                    // echo $result['student_id'];
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <div class="dat">
+                                                <?php echo $result['date'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dat">
+                                                <?php echo $result['student_name'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dat">
+                                                <?php echo $result['student_roll'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dat">
+                                                <?php echo $result['faculty'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dat">
+                                                <?php echo $result['semester'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="dat"
+                                                style="color: <?php echo ($result['application_status'] == 'approved') ? 'green' : 'red'; ?>">
+                                                <?php echo $result['application_status']; ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="view_application.php?id=<?php echo $result['app_id'] ?>"><button
+                                                        style="background-color:rgb(85, 132, 243);">View</button></a>
+                                                <a href="application_accept.php?id=<?php echo $result['app_id'] ?>"><button
+                                                        style="background-color:rgb(60, 168, 2);"
+                                                        onclick="return confirmApproved()">Accept</button></a>
+
+                                                <a href="application_reject.php?id=<?php echo $result['app_id'] ?>"><button
+                                                        style="background-color:rgb(245, 45, 45);"
+                                                        onclick="return rejectConfirm()">Reject</button></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <?php
+                                }
+                            } else {
+                                echo "no application";
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <th>Date</th>
+                            <th>Student Name</th>
+                            <th>Roll No.</th>
+                            <th>Faculty</th>
+                            <th>Semester</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $query = "SELECT * 
+                            FROM application as a
+                            INNER JOIN student as s ON a.student_id=s.student_id
+                            WHERE application_status='approved'";
+                            $data = mysqli_query($conn, $query);
+                            if (mysqli_num_rows($data) > 0) {
+                                while ($result = mysqli_fetch_assoc($data)) {
+                                    // echo $result['student_id'];
+                                    ?>
+                                    <tr>
+                                        <td>
+                                            <div class="data">
+                                                <?php echo $result['date'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="data">
+                                                <?php echo $result['student_name'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="data">
+                                                <?php echo $result['student_roll'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="data">
+                                                <?php echo $result['faculty'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="data">
+                                                <?php echo $result['semester'] ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="data"
+                                                style="color: <?php echo ($result['application_status'] == 'approved') ? 'green' : 'red'; ?>">
+                                                <?php echo $result['application_status']; ?>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="action">
+                                                <a href="view_application.php?id=<?php echo $result['app_id'] ?>"><button
+                                                        style="background-color:rgb(85, 132, 243);">View</button></a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <?php
+                                }
+                            }
+                            ?>
+
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
 
             <!-- teacher section -->
@@ -546,6 +820,12 @@ if (isset($_SESSION['admin_id'])) {
 
     </div>
     <script>
+        function rejectConfirm() {
+            return confirm('Are you sure, you want to reject the application');
+        }
+        function confirmApproved() {
+            return confirm('Are you sure, you want to approve the application');
+        }
         //studnet data popop bca csit bbm
         function bcaStudent() {
             document.querySelector(".bca").classList.remove("hide");
