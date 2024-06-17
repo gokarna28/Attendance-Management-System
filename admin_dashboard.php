@@ -1,7 +1,6 @@
 <?php
 include ("dbconnect.php");
 require ("add_student.php");
-require ("add_admin.php");
 require ("add_teacher.php");
 
 session_start();
@@ -28,7 +27,7 @@ if (isset($_SESSION['admin_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin dashboard</title>
-    <link rel="stylesheet" href="css/admins.css" />
+    <link rel="stylesheet" href="css/admin.css" />
     <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- Import Google font - Poppins  -->
@@ -69,10 +68,7 @@ if (isset($_SESSION['admin_id'])) {
                         <i class="fa-solid fa-user-plus"></i>
                         <p>Add Teacher</p>
                     </div>
-                    <div class="item" id="admin" onclick="adminInfo()">
-                        <i class="fa-solid fa-user-tie"></i>
-                        <p>Add Admin</p>
-                    </div>
+                    
                 </div>
                 <a href="logout.php">
                     <div class="item">
@@ -292,8 +288,8 @@ if (isset($_SESSION['admin_id'])) {
                                         </td>
                                         <td>
                                             <div class="action_btn">
-                                                <a href="#" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
-                                                <a href="#" class="delete_btn"><i class="fa-solid fa-trash"></i></a>
+                                                <a href="edit_student.php?id=<?php echo $row_student['student_id']?>" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
+                                                <a href="delete_student.php?id=<?php echo $row_student['student_id']?>" class="delete_btn" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -325,29 +321,21 @@ if (isset($_SESSION['admin_id'])) {
                                     ?>
                                     <tr>
                                         <td>
-                                            <div class="data">
                                                 <?php echo $row_student['student_name'] ?>
-                                            </div>
                                         </td>
                                         <td>
-                                            <div class="data">
                                                 <?php echo $row_student['student_email'] ?>
-                                            </div>
                                         </td>
                                         <td>
-                                            <div class="data">
                                                 <?php echo $row_student['student_roll'] ?>
-                                            </div>
                                         </td>
                                         <td>
-                                            <div class="data">
                                                 <?php echo $row_student['semester'] ?>
-                                            </div>
                                         </td>
                                         <td>
                                             <div class="action_btn">
-                                                <a href="#" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
-                                                <a href="#" class="delete_btn"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="edit_student.php?id=<?php echo $row_student['student_id']?>" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a href="delete_student.php?id=<?php echo $row_student['student_id']?>" class="delete_btn" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -400,8 +388,8 @@ if (isset($_SESSION['admin_id'])) {
                                         </td>
                                         <td>
                                             <div class="action_btn">
-                                                <a href="#" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
-                                                <a href="#" class="delete_btn"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="edit_student.php?id=<?php echo $row_student['student_id']?>" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a href="delete_student.php?id=<?php echo $row_student['student_id']?>" class="delete_btn" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -674,8 +662,8 @@ if (isset($_SESSION['admin_id'])) {
                                         </td>
                                         <td>
                                             <div class="action_btn">
-                                                <a href="#" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
-                                                <a href="#" class="delete_btn"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="edit_teacher.php?id=<?php echo $row_teacher['teacher_id']?>" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a href="delete_teacher.php?id=<?php echo $row_teacher['teacher_id']?>" class="delete_btn" onclick="return confirmDelete()"><i class="fa-solid fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -728,98 +716,16 @@ if (isset($_SESSION['admin_id'])) {
                 </div>
             </div>
 
-            <!-- add admin section -->
-            <div class="student_container hide" id="admin_container">
-                <h3>Admin Details</h3>
-                <div class="stuedent_details">
-                    <div class="add_btn">
-                        <button onclick="admin_formPopup()">Add Admin</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <th>Name</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                            <!-- retriving student data form student table -->
-                            <?php
-                            $student_query = "SELECT * FROM admin";
-                            $student_data = mysqli_query($conn, $student_query);
-                            if (mysqli_num_rows($student_data) > 0) {
-                                while ($row_student = mysqli_fetch_assoc(($student_data))) {
-                                    //echo $row_student['student_name'];
-                                    ?>
-                                    <tr>
-                                        <td>
-                                            <div class="data">
-                                                <?php echo $row_student['admin_name'] ?>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <div class="action_btn">
-                                                <a href="#" class="edit_btn"><i class="fa-solid fa-user-pen"></i></a>
-                                                <a href="delete_admin.php?a_id=<?php echo $row_student['admin_id'] ?>"
-                                                    class="delete_btn" onclick="return confirmDelete()"><i
-                                                        class="fa-solid fa-trash"></i></a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                            }
-                            ?>
-
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- add admin form -->
-                <div class="studenta_form_container hide" id="admin_form">
-                    <div class="student_add">
-                        <div class="close_btn">
-                            <i class="fa-regular fa-circle-xmark" onclick="closeBtn()"></i>
-                        </div>
-                        <h3>Add Admin</h3>
-                        <form action="" method="post">
-                            <div class="admin_fields">
-                                <div class="input_field">
-                                    <label>Name</label>
-                                    <div class="input">
-                                        <i class="fa-solid fa-user"></i>
-                                        <input type="text" name="admin_name" placeholder="Enter name"
-                                            value="<?php echo $name ?>" required>
-                                    </div>
-                                    <span class='errors'><?php echo $name_error ?></span>
-                                </div>
-
-                                <div class="input_field">
-                                    <label>Password</label>
-                                    <div class="input">
-                                        <input type="password" name="admin_password" placeholder="Enter password"
-                                            value="<?php echo $password ?>" id="admin_password" required>
-                                        <a href="#" class="eyeopen hide"><i class="fa-solid fa-eye"
-                                                onclick="eyeOpen()"></i></a>
-                                        <a href="#" class="eyeclose"><i class="fa-solid fa-eye-slash"
-                                                onclick="eyeClose()"></i></a>
-                                    </div>
-                                    <span class='errors'><?php echo $password_error ?></span>
-                                </div>
-                            </div>
-                            <div class="submit_btn">
-                                <button type="submit" name="admin_add">Add Now</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-            </div>
+           
 
         </div>
     </div>
 
     </div>
     <script>
+        function confirmDelete(){
+            return confirm('Are you sure, you want to delete the student');
+        }
         function rejectConfirm() {
             return confirm('Are you sure, you want to reject the application');
         }
