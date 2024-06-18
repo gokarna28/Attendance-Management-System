@@ -27,7 +27,7 @@ if (isset($_SESSION['admin_id'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin dashboard</title>
-    <link rel="stylesheet" href="css/admin.css" />
+    <link rel="stylesheet" href="css/admins.css" />
     <!-- Link to Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- Import Google font - Poppins  -->
@@ -39,10 +39,12 @@ if (isset($_SESSION['admin_id'])) {
             window.history.replaceState(null, null, window.location.href);
         }
     </script>
-
-</head>
-
-<body>
+<style>
+    .hide{
+        display: none;
+    }
+</style>
+</head>sstyle?>
     <!-- <div class="background"></div> -->
     <div class="body_container">
 
@@ -761,65 +763,46 @@ if (isset($_SESSION['admin_id'])) {
     <script>
         //side bar menu popup
         function studentInfo() {
-            document.querySelector("#student").classList.add('active');
-            document.querySelector(".student_container").classList.remove('hide');
-            document.querySelector("#dashboard").classList.remove('active');
-            document.querySelector("#application").classList.remove('active');
-            document.querySelector("#teacher").classList.remove('active');
-            document.querySelector("#admin").classList.remove('active');
-            document.querySelector(".dashboard_container").classList.add('hide');
-            document.querySelector(".application_container").classList.add('hide');
-            document.querySelector(".teacher_container").classList.add('hide');
-            document.querySelector("#admin_container").classList.add('hide');
+           document.querySelector('#student').classList.add('active');
+           document.querySelector('#dashboard').classList.remove('active');
+           document.querySelector('#application').classList.remove('active');
+           document.querySelector('#teacher').classList.remove('active');
+           document.querySelector('.student_container').classList.remove('hide');
+           document.querySelector('.dashboard_container').classList.add('hide');
+           document.querySelector('.application_container').classList.add('hide');
+           document.querySelector('.teacher_container').classList.add('hide');
         }
         function dashboardInfo() {
-            document.querySelector("#student").classList.remove('active');
-            document.querySelector(".student_container").classList.add('hide');
-            document.querySelector("#dashboard").classList.add('active');
-            document.querySelector("#application").classList.remove('active');
-            document.querySelector("#teacher").classList.remove('active');
-            document.querySelector("#admin").classList.remove('active');
-            document.querySelector(".dashboard_container").classList.remove('hide');
-            document.querySelector(".application_container").classList.add('hide');
-            document.querySelector(".teacher_container").classList.add('hide');
-            document.querySelector("#admin_container").classList.add('hide');
+            document.querySelector('#student').classList.remove('active');
+           document.querySelector('#dashboard').classList.remove('active');
+           document.querySelector('#application').classList.remove('active');
+           document.querySelector('#teacher').classList.remove('active');
+           document.querySelector('.student_container').classList.add('hide');
+           document.querySelector('.dashboard_container').classList.remove('hide');
+           document.querySelector('.application_container').classList.add('hide');
+           document.querySelector('.teacher_container').classList.add('hide');
         }
         function applicationInfo() {
-            document.querySelector("#student").classList.remove('active');
-            document.querySelector(".student_container").classList.add('hide');
-            document.querySelector("#dashboard").classList.remove('active');
-            document.querySelector("#application").classList.add('active');
-            document.querySelector("#teacher").classList.remove('active');
-            document.querySelector("#admin").classList.remove('active');
-            document.querySelector(".dashboard_container").classList.add('hide');
-            document.querySelector(".application_container").classList.remove('hide');
-            document.querySelector(".teacher_container").classList.add('hide');
-            document.querySelector("#admin_container").classList.add('hide');
+            document.querySelector('#student').classList.remove('active');
+           document.querySelector('#dashboard').classList.remove('active');
+           document.querySelector('#application').classList.add('active');
+           document.querySelector('#teacher').classList.remove('active');
+           document.querySelector('.student_container').classList.add('hide');
+           document.querySelector('.dashboard_container').classList.add('hide');
+           document.querySelector('.application_container').classList.remove('hide');
+           document.querySelector('.teacher_container').classList.add('hide');
         }
         function teacherInfo() {
-            document.querySelector("#student").classList.remove('active');
-            document.querySelector(".student_container").classList.add('hide');
-            document.querySelector("#dashboard").classList.remove('active');
-            document.querySelector("#application").classList.remove('active');
-            document.querySelector("#teacher").classList.add('active');
-            document.querySelector("#admin").classList.remove('active');
-            document.querySelector(".dashboard_container").classList.add('hide');
-            document.querySelector(".application_container").classList.add('hide');
-            document.querySelector(".teacher_container").classList.remove('hide');
-            document.querySelector("#admin_container").classList.add('hide');
+            document.querySelector('#student').classList.remove('active');
+           document.querySelector('#dashboard').classList.remove('active');
+           document.querySelector('#application').classList.remove('active');
+           document.querySelector('#teacher').classList.add('active');
+           document.querySelector('.student_container').classList.add('hide');
+           document.querySelector('.dashboard_container').classList.add('hide');
+           document.querySelector('.application_container').classList.add('hide');
+           document.querySelector('.teacher_container').classList.remove('hide');
         }
-        function adminInfo() {
-            document.querySelector("#student").classList.remove('active');
-            document.querySelector(".student_container").classList.add('hide');
-            document.querySelector("#dashboard").classList.remove('active');
-            document.querySelector("#application").classList.remove('active');
-            document.querySelector("#teacher").classList.remove('active');
-            document.querySelector("#admin").classList.add('active');
-            document.querySelector(".dashboard_container").classList.add('hide');
-            document.querySelector(".application_container").classList.add('hide');
-            document.querySelector(".teacher_container").classList.add('hide');
-            document.querySelector("#admin_container").classList.remove('hide');
-        }
+        
 
         // add teacher form popup
         function addTeacher() {

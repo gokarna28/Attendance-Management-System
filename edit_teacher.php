@@ -107,6 +107,10 @@ if (mysqli_num_rows($data) == 1) {
                     <lable>Email:</lable><br>
                     <input type="text" name="email" value="<?php echo $row['teacher_email'] ?>" required>
                 </div>
+                <div class="field">
+                    <lable>Password:</lable><br>
+                    <input type="text" name="pass" value="<?php echo $row['teacher_password'] ?>" required>
+                </div>
                 
             </div>
             <button type="submit" name="submit">Update</button>
@@ -121,9 +125,10 @@ $ID = $_GET['id'];
 if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $email = $_POST['email'];
+    $pass = $_POST['pass'];
     
 
-    $update = "UPDATE teacher SET teacher_name='$name', teacher_email='$email' WHERE teacher_id='$ID'";
+    $update = "UPDATE teacher SET teacher_name='$name', teacher_email='$email', teacher_password='$pass' WHERE teacher_id='$ID'";
     $data = mysqli_query($conn, $update);
     if ($data) {
         echo "<script>alert('successfully updated')</script>";

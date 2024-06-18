@@ -39,6 +39,14 @@ if (isset($_SESSION['student_id'])) {
             window.history.replaceState(null, null, window.location.href);
         }
     </script>
+    <style>
+        .data{
+            display: flex;
+            justify-content: right;
+            font-size: 20px;
+            color: red;
+        }
+    </style>
 
 </head>
 
@@ -102,6 +110,26 @@ if (isset($_SESSION['student_id'])) {
             <!-- application FROM -->
             <div class="application_form">
                 <h2>Application Form</h2>
+                <?php
+
+                $student_query = "SELECT COUNT('a.status') As status, s.student_roll, s.student_name, s.student_email, s.faculty, s.semester
+                                FROM student as s
+                                INNER JOIN attendance as a ON s.student_id=a.s_id 
+                                WHERE student_id='$student_id'";
+                $student_data = mysqli_query($conn, $student_query);
+                if ($student_data) {
+                    $result_student = mysqli_fetch_assoc($student_data);
+                    $percent = (($result_student['status'] / 45) * 100);
+                    ?>
+
+                    <div class="data">
+                        Attendance:
+                        <?php echo number_format($percent, 2); ?>%
+                    </div>
+
+                    <?php
+                }
+                ?>
                 <div class="form_container">
                     <form action="" method="post">
                         <input type="hidden" name="student_id" value="<?php echo $student_id ?>">

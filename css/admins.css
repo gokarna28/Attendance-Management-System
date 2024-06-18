@@ -43,6 +43,7 @@ a {
   width: 90px;
   transition: all 0.5s linear;
   overflow: hidden;
+  cursor: pointer;
 }
 .sidebar:hover {
   width: 270px;
